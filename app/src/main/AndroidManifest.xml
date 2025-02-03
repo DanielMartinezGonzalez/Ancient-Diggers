@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AncientDiggers"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".PreLoadActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AncientDiggers">
@@ -23,12 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.elements.MapActivity"
+        <activity
+            android:name=".MockUpActivity"
             android:exported="false"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.elements.ShopActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.elements.MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
