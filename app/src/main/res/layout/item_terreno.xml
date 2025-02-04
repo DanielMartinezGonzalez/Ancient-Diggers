@@ -1,18 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_margin="8dp">
 
-    <ImageView
-        android:id="@+id/terrenoImage"
+    <!-- Imagen del terreno -->
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+        <ImageView
+            android:id="@+id/terrenoImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_medio_excavar"/>
 
-</androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/terrenoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:text="@string/app_name" />
+
+        <View
+            android:id="@+id/blockOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80000000"
+            android:visibility="gone"/>
+
+        <!-- Icono de candado centrado (inicialmente oculto) -->
+        <ImageView
+            android:id="@+id/lockIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_lock"
+            android:visibility="gone"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Vista semitransparente para simular el bloqueo (inicialmente oculta) -->
+
+
+</FrameLayout>
+

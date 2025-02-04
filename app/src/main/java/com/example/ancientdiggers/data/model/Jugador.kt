@@ -3,86 +3,80 @@ package com.example.ancientdiggers.data.model
 import com.example.ancientdiggers.R
 import com.example.ancientdiggers.data.model.item.Item
 import com.example.ancientdiggers.data.model.terreno.Terreno
-import com.example.ancientdiggers.data.model.terreno.herencia.TerrenoNormal
+import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavable
+import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavado
+import com.example.ancientdiggers.data.model.terreno.terrenos.excavables.TerrenoMedioExcavar
 
 class Jugador {
     private val observers = mutableListOf<(Jugador) -> Unit>()
-    var dinero = 0
+    var dinero = 10
+    var arqueologos = 1
     var hallazgos = ArrayList<Item>()
     var terrenos = ArrayList<Terreno>()
 
     init {
         terrenos.add(
-            TerrenoNormal(nombre = "PrimerTerreno",
-                descripcion = "Pues el primer terreno",
+            TerrenoExcavable(nombre = "PrimerTerreno",
                 desbloqueado = true,
-                imagen = R.drawable.ic_launcher_foreground)
+                coste = 0.0)
         )
         terrenos.add(
-            TerrenoNormal(nombre = "SegundoTerreno",
-                descripcion = "Pues el segundo terreno",
+            TerrenoExcavable(nombre = "SegundoTerreno",
                 desbloqueado = false,
-                imagen = R.drawable.ic_launcher_foreground)
+                coste = 0.0)
         )
         terrenos.add(
-            TerrenoNormal(nombre = "TercerTerreno",
-                descripcion = "Pues el tercer terreno",
-                desbloqueado = false,
-                imagen = R.drawable.ic_launcher_foreground)
-        )
-        terrenos.add(
-            TerrenoNormal(nombre = "CuartoTerreno",
-                descripcion = "Pues el cuarto terreno",
-                desbloqueado = false,
-                imagen = R.drawable.ic_launcher_foreground)
-        )
-        terrenos.add(
-            TerrenoNormal(nombre = "QuintoTerreno",
-                descripcion = "Pues el quinto terreno",
-                desbloqueado = false,
-                imagen = R.drawable.ic_launcher_foreground)
-        )
-        terrenos.add(
-            TerrenoNormal(nombre = "SextoTerreno",
-                descripcion = "Pues el sexto terreno",
+            TerrenoMedioExcavar(nombre = "TercerTerreno",
                 desbloqueado = true,
-                imagen = R.drawable.ic_launcher_foreground)
+                coste = 0.0)
         )
         terrenos.add(
-            TerrenoNormal(nombre = "PrimerTerreno",
-                descripcion = "Pues el primer terreno",
+            TerrenoMedioExcavar(nombre = "CuartoTerreno",
+                desbloqueado = false,
+                coste = 0.0)
+        )
+        terrenos.add(
+            TerrenoExcavado(nombre = "QuintoTerreno")
+        )
+        terrenos.add(
+            TerrenoExcavable(nombre = "SextoTerreno",
                 desbloqueado = true,
-                imagen = R.drawable.ic_launcher_foreground)
+                coste = 10.0)
         )
         terrenos.add(
-            TerrenoNormal(nombre = "SegundoTerreno",
-                descripcion = "Pues el segundo terreno",
+            TerrenoExcavable(nombre = "SeptimoTerreno",
                 desbloqueado = false,
-                imagen = R.drawable.ic_launcher_foreground)
+                coste = 10.0)
         )
         terrenos.add(
-            TerrenoNormal(nombre = "TercerTerreno",
-                descripcion = "Pues el tercer terreno",
-                desbloqueado = false,
-                imagen = R.drawable.ic_launcher_foreground)
-        )
-        terrenos.add(
-            TerrenoNormal(nombre = "CuartoTerreno",
-                descripcion = "Pues el cuarto terreno",
-                desbloqueado = false,
-                imagen = R.drawable.ic_launcher_foreground)
-        )
-        terrenos.add(
-            TerrenoNormal(nombre = "QuintoTerreno",
-                descripcion = "Pues el quinto terreno",
-                desbloqueado = false,
-                imagen = R.drawable.ic_launcher_foreground)
-        )
-        terrenos.add(
-            TerrenoNormal(nombre = "SextoTerreno",
-                descripcion = "Pues el sexto terreno",
+            TerrenoMedioExcavar(nombre = "OctavoTerreno",
                 desbloqueado = true,
-                imagen = R.drawable.ic_launcher_foreground)
+                coste = 10.0)
+        )
+        terrenos.add(
+            TerrenoMedioExcavar(nombre = "NovenoTerreno",
+                desbloqueado = false,
+                coste = 10.0)
+        )
+        terrenos.add(
+            TerrenoExcavable(nombre = "DecimoTerreno",
+                desbloqueado = true,
+                coste = 10.1)
+        )
+        terrenos.add(
+            TerrenoExcavable(nombre = "UndecimoTerreno",
+                desbloqueado = false,
+                coste = 10.1)
+        )
+        terrenos.add(
+            TerrenoMedioExcavar(nombre = "DuodecimoTerreno",
+                desbloqueado = true,
+                coste = 10.1)
+        )
+        terrenos.add(
+            TerrenoMedioExcavar(nombre = "TridecimoTerreno",
+                desbloqueado = false,
+                coste = 10.1)
         )
 
     }
@@ -99,8 +93,34 @@ class Jugador {
         observers.clear()
     }
 
-    fun excavar(posicionTerreno: Int){
-        terrenos[posicionTerreno] = terrenos.get(posicionTerreno).excavar()
+    fun puedeComprar(posicionTerreno: Int): Boolean{
+        val terreno = terrenos[posicionTerreno] as? TerrenoExcavable ?: return false
+        return if (terreno.coste <= dinero && !terreno.excavable() ) {
+            terreno.desbloquear()
+            notifyObservers()
+            true
+        } else {
+            false
+        }
+    }
+
+    fun solicitudExcavar(posicionTerreno: Int): Boolean{
+        val puedeExcavar = arqueologos > 0
+        if (puedeExcavar) {
+            excavar(posicionTerreno)
+            generarHallazgo()
+        }
+        notifyObservers()
+        return puedeExcavar
+    }
+
+    private fun excavar(posicionTerreno: Int){
+        val terreno = terrenos[posicionTerreno] as TerrenoExcavable
+        terrenos[posicionTerreno] = terreno.excavar()
+    }
+
+    private fun generarHallazgo(){
+
     }
 
     private fun notifyObservers() {
