@@ -8,21 +8,105 @@
     tools:context=".ui.elements.MainActivity">
 
     <!-- Barra superior -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/top_bar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/purple_500"
+        android:id="@+id/top_bar"
+        android:background="@color/accent_brown"
         android:elevation="4dp"
-        app:title="Mi Aplicación"
-        app:titleTextColor="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingHorizontal="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tituloToolBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:text="Nombre de usuario"
+            android:paddingEnd="16dp"/>
+
+        <LinearLayout
+            android:id="@+id/recursosTopBar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/accent_brown"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_lupa"/>
+
+                    <TextView
+                        android:id="@+id/arqueologosTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="-1"
+                        android:paddingStart="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:background="@color/accent_brown"
+                    android:paddingHorizontal="12dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_dinero"/>
+
+                    <TextView
+                        android:id="@+id/dineroTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:text="-1"
+                        android:paddingStart="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
 
     <!-- Contenido central -->
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/arena"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_bar"
@@ -32,7 +116,7 @@
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/purple_500"
+        android:background="@color/accent_brown"
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -40,6 +124,7 @@
         <Button
             android:id="@+id/bottom_map"
             android:text="Mapa"
+            android:backgroundTint="@color/brown"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -49,6 +134,7 @@
         <Button
             android:id="@+id/bottom_shop"
             android:text="Tienda"
+            android:backgroundTint="@color/brown"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -57,6 +143,7 @@
         <Button
             android:id="@+id/bottom_inventory"
             android:text="Inventario"
+            android:backgroundTint="@color/brown"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">

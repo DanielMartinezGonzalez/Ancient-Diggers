@@ -11,16 +11,9 @@ class TerrenoMedioExcavar (
 ) : TerrenoExcavable(nombre, desbloqueado, coste){
 
     // En TerrenoExcavable, la imagen se asigna según el estado
-    override var imagen: Int = if (desbloqueado) {
-        R.drawable.img_medio_excavar
-    } else {
-        R.drawable.img_terreno_bloqueado
-    }
+    override var imagen: Int = R.drawable.terreno_medio_excavado
 
-    // Esta función en TerrenoExcavable retorna un objeto que indica que se ha iniciado la excavación.
     override fun excavar(): TerrenoExcavado {
-        // Aquí la implementación podría ser abstracta o devolver un objeto base.
-        // Se deja como ejemplo:
         return TerrenoExcavado(nombre)
     }
 

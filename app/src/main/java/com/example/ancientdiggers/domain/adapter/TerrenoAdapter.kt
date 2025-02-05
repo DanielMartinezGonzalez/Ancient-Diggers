@@ -38,8 +38,9 @@ class TerrenoAdapter(
         }
         holder.itemView.setOnLongClickListener {
             if(Partida.jugador.puedeComprar(position)) {
+                holder.desbloquear()
                 Toast.makeText(holder.itemView.context, "Has comprado este terreno", Toast.LENGTH_SHORT).show()
-            } else if(terreno.excavable()){
+            } else {
                 Toast.makeText(holder.itemView.context, "No puedes comprar este terreno", Toast.LENGTH_SHORT).show()
             }
             true
@@ -62,6 +63,11 @@ class TerrenoAdapter(
                 viewBlock.visibility = View.VISIBLE
                 lockIcon.visibility = ImageView.VISIBLE
             }
+        }
+
+        fun desbloquear(){
+            viewBlock.visibility  = View.GONE
+            lockIcon.visibility = ImageView.GONE
         }
     }
 }

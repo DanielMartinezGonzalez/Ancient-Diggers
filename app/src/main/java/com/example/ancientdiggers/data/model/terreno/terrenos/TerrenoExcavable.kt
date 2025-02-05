@@ -11,9 +11,9 @@ open class TerrenoExcavable (
     ) : Terreno(nombre){
 
     override var imagen: Int = listOf(
-        R.drawable.img_terreno_excavable_1,
-        R.drawable.img_terreno_excavable_2,
-        R.drawable.img_terreno_excavable_3
+        R.drawable.terreno_excavable_1,
+        R.drawable.terreno_excavable_2,
+        R.drawable.terreno_excavable_3
     ).random()
 
 
@@ -21,9 +21,8 @@ open class TerrenoExcavable (
         return TerrenoMedioExcavar(nombre, desbloqueado, coste)
     }
 
-    fun desbloquear(){
+    fun desbloquear() {
         desbloqueado = true
-        imagen = R.drawable.img_terreno_excavable_2
     }
 
     override fun excavable(): Boolean {

@@ -10,5 +10,5 @@ class TerrenoExcavado (
         return false
     }
 
-    override var imagen: Int = R.drawable.img_excavado
+    override var imagen: Int = R.drawable.terreno_excavado
 }

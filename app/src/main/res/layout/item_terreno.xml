@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            android:src="@drawable/img_medio_excavar"/>
+            android:src="@drawable/terreno_excavable_1"/>
 
         <TextView
             android:id="@+id/terrenoText"

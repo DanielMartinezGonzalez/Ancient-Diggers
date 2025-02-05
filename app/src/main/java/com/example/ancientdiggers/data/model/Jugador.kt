@@ -1,7 +1,6 @@
 package com.example.ancientdiggers.data.model
 
-import com.example.ancientdiggers.R
-import com.example.ancientdiggers.data.model.item.Item
+import com.example.ancientdiggers.data.model.hallazgo.Hallazgo
 import com.example.ancientdiggers.data.model.terreno.Terreno
 import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavable
 import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavado
@@ -9,9 +8,10 @@ import com.example.ancientdiggers.data.model.terreno.terrenos.excavables.Terreno
 
 class Jugador {
     private val observers = mutableListOf<(Jugador) -> Unit>()
-    var dinero = 10
-    var arqueologos = 1
-    var hallazgos = ArrayList<Item>()
+    var nombre: String = "Daniel"
+    var dinero: Int = 10
+    var arqueologos: Int = 1
+    var hallazgos = ArrayList<Hallazgo>()
     var terrenos = ArrayList<Terreno>()
 
     init {
