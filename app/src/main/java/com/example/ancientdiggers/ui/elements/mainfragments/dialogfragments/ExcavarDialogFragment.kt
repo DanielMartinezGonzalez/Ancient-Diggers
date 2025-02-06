@@ -16,7 +16,6 @@ class ExcavarDialogFragment : DialogFragment() {
     companion object {
         private const val ARG_TERRENO_INDEX = "terreno_index"
 
-        // Método de fábrica para crear una nueva instancia pasando el índice
         fun newInstance(terrenoIndex: Int): ExcavarDialogFragment {
             val fragment = ExcavarDialogFragment()
             val args = Bundle()
@@ -38,7 +37,6 @@ class ExcavarDialogFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Infla el layout personalizado para el diálogo
         val view = inflater.inflate(R.layout.fragment_popup_excavar, container, false)
         val btnCancelar = view.findViewById<Button>(R.id.btnCancelar)
         val btnExcavar = view.findViewById<Button>(R.id.btnExcavar)

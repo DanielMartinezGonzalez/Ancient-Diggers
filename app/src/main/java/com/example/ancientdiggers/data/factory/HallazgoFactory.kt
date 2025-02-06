@@ -6,30 +6,53 @@ import com.example.ancientdiggers.data.model.hallazgo.TipoCultura
 import com.example.ancientdiggers.data.model.hallazgo.TipoEpoca
 import kotlinx.coroutines.channels.ticker
 
-class HallazgoFactory {
+object HallazgoFactory {
+
+    private val epocasConPesos = listOf(
+        TipoEpoca.PREHISTORIA to 0.3,
+        TipoEpoca.ANTIGÜEDAD to 0.3,
+        TipoEpoca.ROMANA to 0.1,
+        TipoEpoca.EDAD_MEDIA to 0.2,
+        TipoEpoca.CONTEMPORANEO to 0.1
+    )
+
+    // Definición de culturas con pesos para cada época:
+    private val culturasPrehistoria = listOf(
+        TipoCultura.PALEOLITICO to 0.5,
+        TipoCultura.NEOLITICO to 0.3,
+        TipoCultura.EDAD_DE_BRONCE to 0.2
+    )
+    private val culturasAntiguedad = listOf(
+        TipoCultura.VACCEO to 0.4,
+        TipoCultura.IBERO to 0.3,
+        TipoCultura.CELTA to 0.2,
+        TipoCultura.CELTIBERO to 0.1
+    )
+    private val culturasEdadMedia = listOf(
+        TipoCultura.VISIGODO to 0.3,
+        TipoCultura.ASTURIANO to 0.4,
+        TipoCultura.MUSULMAN to 0.3
+    )
+
+    private fun <T> elegirConPeso(opciones: List<Pair<T, Double>>): T {
+        val totalPeso = opciones.sumOf { it.second }
+        val randomValor = Math.random() * totalPeso
+        var acumulado = 0.0
+        for ((opcion, peso) in opciones) {
+            acumulado += peso
+            if (randomValor <= acumulado) {
+                return opcion
+            }
+        }
+        return opciones.last().first
+    }
 
     private fun generarCultura(epoca: TipoEpoca): TipoCultura {
         return when (epoca) {
-            TipoEpoca.PREHISTORIA -> listOf(
-                TipoCultura.PALEOLITICO,
-                TipoCultura.NEOLITICO,
-                TipoCultura.EDAD_DE_BRONCE
-            ).random()
-
-            TipoEpoca.ANTIGÜEDAD -> listOf(
-                TipoCultura.VACCEO,
-                TipoCultura.IBERO,
-                TipoCultura.CELTA,
-                TipoCultura.CELTIBERO
-            ).random()
-
+            TipoEpoca.PREHISTORIA -> elegirConPeso(culturasPrehistoria)
+            TipoEpoca.ANTIGÜEDAD -> elegirConPeso(culturasAntiguedad)
             TipoEpoca.ROMANA -> TipoCultura.ROMANO
-            TipoEpoca.EDAD_MEDIA -> listOf(
-                TipoCultura.VISIGODO,
-                TipoCultura.ASTURIANO,
-                TipoCultura.MUSULMAN
-            ).random()
-
+            TipoEpoca.EDAD_MEDIA -> elegirConPeso(culturasEdadMedia)
             TipoEpoca.CONTEMPORANEO -> TipoCultura.CONTEMPORANEO
             else -> TipoCultura.DESCONOCIDO
         }
@@ -41,7 +64,7 @@ class HallazgoFactory {
         var descripcion: String = "Descripcion placeholder"
         var valor: Int = 0
         val imagen: Int = R.drawable.ic_placeholder
-        val epoca = TipoEpoca.entries.toTypedArray().random()
+        val epoca = elegirConPeso(epocasConPesos)
 
         // Seleccionamos la cultura según la época.
         val cultura: TipoCultura = generarCultura(epoca)
@@ -95,7 +118,7 @@ class HallazgoFactory {
                     descripcion = "Instrumento de piedra o metal utilizado en labores de campo, que evidencia el sistema colectivo y agrícola de los vacceos."
                     valor = 20
                 }
-            )
+            ).random()
             TipoCultura.IBERO -> listOf(
                 {
                     nombre = "Vasija ibérica"
@@ -191,7 +214,7 @@ class HallazgoFactory {
                     descripcion = "Un pequeño objeto de moda, como una pulsera o reloj, posiblemente caído de un visitante, que añade un guiño humorístico a la mezcla de épocas."
                     valor = 5
                 }
-            )
+            ).random()
             TipoCultura.DESCONOCIDO -> listOf {
                 nombre = "Objeto misterioso"
                 descripcion = "Objeto irreconocible que deja sin palabras a todos tus expertos"
@@ -202,8 +225,8 @@ class HallazgoFactory {
         return Hallazgo(nombre, cultura, epoca, descripcion, imagen, valor)
     }
 
-    fun generarAllHallazgos(): List<Hallazgo> {
-        return listOf(
+    fun generarAllHallazgos(): ArrayList<Hallazgo> {
+        return arrayListOf(
             Hallazgo(
                 nombre = "Piedra tallada",
                 cultura = TipoCultura.PALEOLITICO,
