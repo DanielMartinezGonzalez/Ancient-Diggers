@@ -17,7 +17,7 @@ class Jugador {
     init {
 
         terrenos = TerrenoFactory.generarAllTerrenos()
-        hallazgos = HallazgoFactory.generarAllHallazgos() as ArrayList<Hallazgo>
+        hallazgos = HallazgoFactory.generarAllHallazgos()
 
     }
 
@@ -59,8 +59,15 @@ class Jugador {
         terrenos[posicionTerreno] = terreno.excavar()
     }
 
-    private fun generarHallazgo(){
+    fun vender(posicionHallazgo: Int){
+        val hallazgo = hallazgos[posicionHallazgo]
+        dinero.plus(hallazgo.valor)
+        hallazgos.removeAt(posicionHallazgo)
+        notifyObservers()
+    }
 
+    private fun generarHallazgo(){
+        hallazgos.add(HallazgoFactory.generarHallazgoAleatorio())
     }
 
     private fun notifyObservers() {

@@ -28,7 +28,7 @@ class MuseoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView = view.findViewById(R.id.recyclerViewItems)
+        recyclerView = view.findViewById(R.id.recyclerViewMuseo)
         recyclerView.layoutManager = GridLayoutManager(context, 1)
 
         actualizarMuseo()
@@ -40,13 +40,13 @@ class MuseoFragment : Fragment() {
     private fun actualizarMuseo(){
         val hallazgos: List<Hallazgo> = Partida.jugador.hallazgos
         adapter = HallazgoAdapter(hallazgos) {hallazgo, posicion ->
-            mostrarHallazgo(posicion)
+            mostrarHallazgo(posicion, hallazgo)
         }
         recyclerView.adapter = adapter
     }
 
-    private fun mostrarHallazgo(index: Int) {
-        val dialog = InfoHallazgoDialogFragment.newInstance(index)
+    private fun mostrarHallazgo(index: Int, hallazgo: Hallazgo) {
+        val dialog = InfoHallazgoDialogFragment.newInstance(index, hallazgo)
         dialog.show(childFragmentManager, "InfoHallazgoDialogFragment")
     }
 }

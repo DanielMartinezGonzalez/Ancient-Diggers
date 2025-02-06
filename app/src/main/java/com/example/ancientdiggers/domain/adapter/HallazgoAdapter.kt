@@ -45,8 +45,8 @@ class HallazgoAdapter (
 
         fun bind(hallazgo: Hallazgo){
             nombreHallazgo.text = hallazgo.nombre
-            culturaHallazgo.text = hallazgo.cultura
-            epocaHallazgo.text = hallazgo.epoca
+            culturaHallazgo.text = hallazgo.cultura.toString()
+            epocaHallazgo.text = hallazgo.epoca.toString()
             descripcionHallazgo.text = hallazgo.descripcion
             hallazgoImage.setImageResource(hallazgo.imagen)
         }

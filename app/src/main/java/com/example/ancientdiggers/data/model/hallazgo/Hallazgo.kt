@@ -14,19 +14,13 @@ class Hallazgo(
     val imagen: Int,
     val valor: Int
 ): Serializable {
-
-    companion object {
-
-        fun newInstance() :Hallazgo {
-            return Hallazgo(
-                "Nombre Placeholder",
-                TipoCultura.VACCEO,
-                TipoEpoca.ANTIGÜEDAD,
-                "Descripcion placeholder",
-                R.drawable.ic_placeholder,
-                 0
-            )
-        }
-    }
+    constructor() : this(
+        "Nombre Placeholder",
+        TipoCultura.VACCEO,
+        TipoEpoca.ANTIGÜEDAD,
+        "Si puedes ver esto, ha habido un error en la instanciación de la clase",
+        R.drawable.ic_placeholder,
+        0
+    )
 
 }
