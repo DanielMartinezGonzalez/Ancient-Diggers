@@ -6,14 +6,18 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AncientDiggers"
         tools:targetApi="31">
+        <service
+            android:name=".domain.ExcavacionService"
+            android:exported="false"></service>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".PreLoadActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AncientDiggers">
@@ -23,12 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.elements.MapActivity"
+
+        <activity
+            android:name=".ui.elements.MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.elements.ShopActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

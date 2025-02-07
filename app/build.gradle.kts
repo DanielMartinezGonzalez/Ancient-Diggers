@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.ancientdiggers"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.ancientdiggers"
