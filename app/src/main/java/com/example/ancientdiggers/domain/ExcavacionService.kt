@@ -1,4 +1,4 @@
-package com.example.ancientdiggers.domain.adapter
+package com.example.ancientdiggers.domain
 
 import android.app.IntentService
 import android.content.Intent
