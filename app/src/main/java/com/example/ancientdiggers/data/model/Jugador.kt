@@ -1,7 +1,5 @@
 package com.example.ancientdiggers.data.model
 
-import android.content.Intent
-import com.example.ancientdiggers.data.Partida.context
 import com.example.ancientdiggers.data.factory.HallazgoFactory
 import com.example.ancientdiggers.data.factory.TerrenoFactory
 import com.example.ancientdiggers.data.factory.VentaFactory
@@ -9,10 +7,11 @@ import com.example.ancientdiggers.data.model.hallazgo.Hallazgo
 import com.example.ancientdiggers.data.model.terreno.Terreno
 import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavable
 import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavandose
-import com.example.ancientdiggers.data.model.venta.TipoMejora
 import com.example.ancientdiggers.data.model.venta.Venta
-import com.example.ancientdiggers.domain.adapter.ExcavacionService
 
+/*
+Clase que presenta los datos del usuario actual de la partida y su comportamiento
+ */
 class Jugador {
     private val observers = mutableListOf<(Jugador) -> Unit>()
     var nombre: String = "Daniel"

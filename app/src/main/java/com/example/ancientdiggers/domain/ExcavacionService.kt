@@ -5,12 +5,14 @@ import android.content.Intent
 import android.content.Context
 import com.example.ancientdiggers.data.Partida
 
-
+/*
+Intent que cronometra el tiempo hasta que se haya finalizado la excavación.
+Después le notifica al usuario
+ */
 class ExcavacionService : IntentService("ExcavacionService") {
 
     override fun onHandleIntent(intent: Intent?) {
         intent?.let {
-            // Se recupera la posición del terreno y la cantidad de mejoras (número de upgrades)
             val posicion = it.getIntExtra("posicion", -1)
             val mejorasCount = it.getIntExtra("mejorasCount", 0)
 

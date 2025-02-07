@@ -12,8 +12,11 @@ import com.example.ancientdiggers.R
 import com.example.ancientdiggers.data.Partida
 import com.example.ancientdiggers.data.model.venta.TipoMejora
 import com.example.ancientdiggers.data.model.venta.Venta
-import com.example.ancientdiggers.domain.adapter.ExcavacionService
+import com.example.ancientdiggers.domain.ExcavacionService
 
+/*
+DialogFragment que muestra el cuadro de diálogo para decidir si excavar
+ */
 class ExcavarDialogFragment : DialogFragment() {
 
     companion object {

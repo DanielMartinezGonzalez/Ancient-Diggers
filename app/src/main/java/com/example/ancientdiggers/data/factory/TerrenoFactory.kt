@@ -5,8 +5,14 @@ import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavable
 import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavado
 import com.example.ancientdiggers.data.model.terreno.terrenos.excavables.TerrenoMedioExcavar
 
+/*
+Factoría usada para generar clases Terreno
+ */
 object TerrenoFactory {
 
+    /*
+    Genera todos los posibles Terrenos
+     */
     fun generarAllTerrenos (): ArrayList<Terreno> {
         return arrayListOf(
             TerrenoExcavable(nombre = "PrimerTerreno",
@@ -36,16 +42,16 @@ object TerrenoFactory {
                 coste = 10),
             TerrenoExcavable(nombre = "DecimoTerreno",
                 desbloqueado = true,
-                coste = 10),
+                coste = 11),
             TerrenoExcavable(nombre = "UndecimoTerreno",
                 desbloqueado = false,
-                coste = 10),
+                coste = 11),
             TerrenoMedioExcavar(nombre = "DuodecimoTerreno",
                 desbloqueado = true,
-                coste = 10),
+                coste = 11),
             TerrenoMedioExcavar(nombre = "TridecimoTerreno",
                 desbloqueado = false,
-                coste = 10)
+                coste = 11)
         )
     }
 }

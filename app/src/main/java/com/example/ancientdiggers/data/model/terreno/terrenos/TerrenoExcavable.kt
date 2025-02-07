@@ -4,6 +4,11 @@ import com.example.ancientdiggers.R
 import com.example.ancientdiggers.data.model.terreno.Terreno
 import com.example.ancientdiggers.data.model.terreno.terrenos.excavables.TerrenoMedioExcavar
 
+/*
+Clase que hereda de Terreno y de la que heredan todos los terrenos que puedan ser excavables (Ahora mismo sólo TerrenoMedioExcavado)
+
+Representa los terrenos que pueden ser excavable y su comportamiento
+ */
 open class TerrenoExcavable (
     nombre: String,
     private var desbloqueado: Boolean = true,

@@ -5,6 +5,11 @@ import com.example.ancientdiggers.data.model.hallazgo.Hallazgo
 import com.example.ancientdiggers.data.model.hallazgo.TipoCultura
 import com.example.ancientdiggers.data.model.hallazgo.TipoEpoca
 
+/*
+Objeto usado para instanciar los hallazgos contemplados actualmente.
+
+Puede generar una lista con todos los posibles hallazgos o generar uno aleatoriamente por pesos
+ */
 object HallazgoFactory {
 
     private val epocasConPesos = listOf(
@@ -15,7 +20,6 @@ object HallazgoFactory {
         TipoEpoca.CONTEMPORANEO to 0.1
     )
 
-    // Definición de culturas con pesos para cada época:
     private val culturasPrehistoria = listOf(
         TipoCultura.PALEOLITICO to 0.5,
         TipoCultura.NEOLITICO to 0.3,
@@ -33,31 +37,9 @@ object HallazgoFactory {
         TipoCultura.MUSULMAN to 0.3
     )
 
-    private fun <T> elegirConPeso(opciones: List<Pair<T, Double>>): T {
-        val totalPeso = opciones.sumOf { it.second }
-        val randomValor = Math.random() * totalPeso
-        var acumulado = 0.0
-        for ((opcion, peso) in opciones) {
-            acumulado += peso
-            if (randomValor <= acumulado) {
-                return opcion
-            }
-        }
-        return opciones.last().first
-    }
-
-    private fun generarCultura(epoca: TipoEpoca): TipoCultura {
-        return when (epoca) {
-            TipoEpoca.PREHISTORIA -> elegirConPeso(culturasPrehistoria)
-            TipoEpoca.ANTIGÜEDAD -> elegirConPeso(culturasAntiguedad)
-            TipoEpoca.ROMANA -> TipoCultura.ROMANO
-            TipoEpoca.EDAD_MEDIA -> elegirConPeso(culturasEdadMedia)
-            TipoEpoca.CONTEMPORANEO -> TipoCultura.MODERNA
-            else -> TipoCultura.DESCONOCIDO
-        }
-    }
-
-
+    /*
+    Entrega de forma aleatoria ponderada por pesos un Hallazgo
+     */
     fun generarHallazgoAleatorio(): Hallazgo {
         var nombre: String = "Nombre hallazgo"
         var descripcion: String = "Descripcion placeholder"
@@ -250,6 +232,9 @@ object HallazgoFactory {
         return Hallazgo(nombre, cultura, epoca, descripcion, imagen, valor)
     }
 
+    /*
+    Entrega una lista con todos los posibles hallazgos
+     */
     fun generarAllHallazgos(): ArrayList<Hallazgo> {
         return arrayListOf(
             Hallazgo(
@@ -459,5 +444,30 @@ object HallazgoFactory {
             )
         )
     }
+
+    private fun <T> elegirConPeso(opciones: List<Pair<T, Double>>): T {
+        val totalPeso = opciones.sumOf { it.second }
+        val randomValor = Math.random() * totalPeso
+        var acumulado = 0.0
+        for ((opcion, peso) in opciones) {
+            acumulado += peso
+            if (randomValor <= acumulado) {
+                return opcion
+            }
+        }
+        return opciones.last().first
+    }
+
+    private fun generarCultura(epoca: TipoEpoca): TipoCultura {
+        return when (epoca) {
+            TipoEpoca.PREHISTORIA -> elegirConPeso(culturasPrehistoria)
+            TipoEpoca.ANTIGÜEDAD -> elegirConPeso(culturasAntiguedad)
+            TipoEpoca.ROMANA -> TipoCultura.ROMANO
+            TipoEpoca.EDAD_MEDIA -> elegirConPeso(culturasEdadMedia)
+            TipoEpoca.CONTEMPORANEO -> TipoCultura.MODERNA
+            else -> TipoCultura.DESCONOCIDO
+        }
+    }
+
 
 }
