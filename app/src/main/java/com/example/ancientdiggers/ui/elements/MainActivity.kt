@@ -1,6 +1,7 @@
 package com.example.ancientdiggers.ui.elements
 
 import android.os.Bundle
+import android.provider.Telephony.Mms.Part
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         val transaccion = supportFragmentManager.beginTransaction()
         transaccion.replace(R.id.fragmentContainer, fragment)
         transaccion.commit()
+        cargarRecursos()
         cargarObservers(Partida.jugador)
     }
 
@@ -45,8 +47,14 @@ class MainActivity : AppCompatActivity() {
     private fun cargarObservers(jugador: Jugador){
         jugador.reset()
         jugador.addObserver {
-            arqueoValor.text = it.arqueologos.toString()
-            dineroValor.text = it.dinero.toString()
+            cargarRecursos()
         }
+    }
+
+    private fun cargarRecursos(){
+        val jugador = Partida.jugador
+        arqueoValor.text = jugador.arqueologos.toString()
+        dineroValor.text = jugador.dinero.toString()
+        System.out.println("Se han cargado los recursos")
     }
 }

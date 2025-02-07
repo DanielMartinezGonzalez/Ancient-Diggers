@@ -1,13 +1,11 @@
 package com.example.ancientdiggers.domain.adapter
 
-import android.provider.ContactsContract.CommonDataKinds.Im
-import android.util.Printer
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.compose.ui.layout.Layout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ancientdiggers.R
 import com.example.ancientdiggers.data.model.hallazgo.Hallazgo

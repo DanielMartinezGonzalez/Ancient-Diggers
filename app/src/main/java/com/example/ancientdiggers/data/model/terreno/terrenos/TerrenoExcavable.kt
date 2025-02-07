@@ -7,7 +7,7 @@ import com.example.ancientdiggers.data.model.terreno.terrenos.excavables.Terreno
 open class TerrenoExcavable (
     nombre: String,
     private var desbloqueado: Boolean = true,
-    val coste: Double
+    val coste: Int
     ) : Terreno(nombre){
 
     override var imagen: Int = listOf(

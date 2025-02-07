@@ -1,18 +1,17 @@
 package com.example.ancientdiggers.domain.adapter
 
-import android.content.Context
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ancientdiggers.R
 import com.example.ancientdiggers.data.Partida
 import com.example.ancientdiggers.data.model.terreno.Terreno
 import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavable
-import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavado
+import com.google.android.material.snackbar.Snackbar
 
 class TerrenoAdapter(
     private val terrenos: List<Terreno>,
@@ -32,16 +31,16 @@ class TerrenoAdapter(
             if(terreno.excavable()) {
                 onTerrenoClick(terreno, position)
             } else {
-                Toast.makeText(holder.itemView.context, "Este terreno no puede ser excavado", Toast.LENGTH_SHORT).show()
+                Snackbar.make(holder.itemView, "Este terreno no puede ser excavado", Snackbar.LENGTH_SHORT).show()
             }
 
         }
         holder.itemView.setOnLongClickListener {
-            if(Partida.jugador.puedeComprar(position)) {
+            if(Partida.jugador.puedeComprarTerreno(position)) {
                 holder.desbloquear()
-                Toast.makeText(holder.itemView.context, "Has comprado este terreno", Toast.LENGTH_SHORT).show()
+                Snackbar.make(holder.itemView, "Has comprado este terreno", Snackbar.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(holder.itemView.context, "No puedes comprar este terreno", Toast.LENGTH_SHORT).show()
+                Snackbar.make(holder.itemView, "No puedes comprar este terreno", Snackbar.LENGTH_SHORT).show()
             }
             true
         }

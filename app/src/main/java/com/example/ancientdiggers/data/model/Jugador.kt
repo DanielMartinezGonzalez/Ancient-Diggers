@@ -2,9 +2,11 @@ package com.example.ancientdiggers.data.model
 
 import com.example.ancientdiggers.data.factory.HallazgoFactory
 import com.example.ancientdiggers.data.factory.TerrenoFactory
+import com.example.ancientdiggers.data.factory.VentaFactory
 import com.example.ancientdiggers.data.model.hallazgo.Hallazgo
 import com.example.ancientdiggers.data.model.terreno.Terreno
 import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavable
+import com.example.ancientdiggers.data.model.venta.Venta
 
 class Jugador {
     private val observers = mutableListOf<(Jugador) -> Unit>()
@@ -13,11 +15,13 @@ class Jugador {
     var arqueologos: Int = 1
     var hallazgos = ArrayList<Hallazgo>()
     var terrenos = ArrayList<Terreno>()
+    var mejoras = ArrayList<Venta>()
 
     init {
 
         terrenos = TerrenoFactory.generarAllTerrenos()
         hallazgos = HallazgoFactory.generarAllHallazgos()
+        mejoras = VentaFactory.generarAllVentas()
 
     }
 
@@ -33,10 +37,11 @@ class Jugador {
         observers.clear()
     }
 
-    fun puedeComprar(posicionTerreno: Int): Boolean{
+    fun puedeComprarTerreno(posicionTerreno: Int): Boolean{
         val terreno = terrenos[posicionTerreno] as? TerrenoExcavable ?: return false
         return if (terreno.coste <= dinero && !terreno.excavable() ) {
             terreno.desbloquear()
+            dinero -= terreno.coste
             notifyObservers()
             true
         } else {
@@ -61,9 +66,13 @@ class Jugador {
 
     fun vender(posicionHallazgo: Int){
         val hallazgo = hallazgos[posicionHallazgo]
-        dinero.plus(hallazgo.valor)
+        dinero += hallazgo.valor
         hallazgos.removeAt(posicionHallazgo)
         notifyObservers()
+    }
+
+    fun comprarMejora(mejora: Venta){
+
     }
 
     private fun generarHallazgo(){

@@ -53,7 +53,7 @@ object HallazgoFactory {
             TipoEpoca.ANTIGÜEDAD -> elegirConPeso(culturasAntiguedad)
             TipoEpoca.ROMANA -> TipoCultura.ROMANO
             TipoEpoca.EDAD_MEDIA -> elegirConPeso(culturasEdadMedia)
-            TipoEpoca.CONTEMPORANEO -> TipoCultura.CONTEMPORANEO
+            TipoEpoca.CONTEMPORANEO -> TipoCultura.MODERNA
             else -> TipoCultura.DESCONOCIDO
         }
     }
@@ -203,7 +203,7 @@ object HallazgoFactory {
                     valor = 60
                 }
             )
-            TipoCultura.CONTEMPORANEO -> listOf(
+            TipoCultura.MODERNA -> listOf(
                 {
                     nombre = "Botella de vidrio"
                     descripcion = "Una botella vacía encontrada en el campo, más común de lo que desearíamos."
@@ -409,7 +409,7 @@ object HallazgoFactory {
 
             Hallazgo(
                 nombre = "Botella de vidrio",
-                cultura = TipoCultura.CONTEMPORANEO,
+                cultura = TipoCultura.MODERNA,
                 epoca = TipoEpoca.CONTEMPORANEO,
                 descripcion = "Una botella vacía encontrada en el campo, más común de lo que desearíamos.",
                 imagen = R.drawable.ic_placeholder,
@@ -417,7 +417,7 @@ object HallazgoFactory {
             ),
             Hallazgo(
                 nombre = "Accesorio moderno",
-                cultura = TipoCultura.CONTEMPORANEO,
+                cultura = TipoCultura.MODERNA,
                 epoca = TipoEpoca.CONTEMPORANEO,
                 descripcion = "Un pequeño objeto de moda, como una pulsera o reloj, posiblemente caído de un visitante, que añade un guiño humorístico a la mezcla de épocas.",
                 imagen = R.drawable.ic_placeholder,
