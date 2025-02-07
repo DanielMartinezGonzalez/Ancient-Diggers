@@ -1,7 +1,6 @@
 package com.example.ancientdiggers.ui.elements
 
 import android.os.Bundle
-import android.provider.Telephony.Mms.Part
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -45,9 +44,11 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun cargarObservers(jugador: Jugador){
-        jugador.reset()
+        jugador.limpiarObserves()
         jugador.addObserver {
-            cargarRecursos()
+            runOnUiThread {
+                cargarRecursos()
+            }
         }
     }
 

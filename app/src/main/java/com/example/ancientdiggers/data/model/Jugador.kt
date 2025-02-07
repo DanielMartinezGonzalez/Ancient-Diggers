@@ -1,12 +1,17 @@
 package com.example.ancientdiggers.data.model
 
+import android.content.Intent
+import com.example.ancientdiggers.data.Partida.context
 import com.example.ancientdiggers.data.factory.HallazgoFactory
 import com.example.ancientdiggers.data.factory.TerrenoFactory
 import com.example.ancientdiggers.data.factory.VentaFactory
 import com.example.ancientdiggers.data.model.hallazgo.Hallazgo
 import com.example.ancientdiggers.data.model.terreno.Terreno
 import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavable
+import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavandose
+import com.example.ancientdiggers.data.model.venta.TipoMejora
 import com.example.ancientdiggers.data.model.venta.Venta
+import com.example.ancientdiggers.domain.adapter.ExcavacionService
 
 class Jugador {
     private val observers = mutableListOf<(Jugador) -> Unit>()
@@ -15,25 +20,20 @@ class Jugador {
     var arqueologos: Int = 1
     var hallazgos = ArrayList<Hallazgo>()
     var terrenos = ArrayList<Terreno>()
-    var mejoras = ArrayList<Venta>()
+    var mejoras = HashMap<Venta, Int>()
 
     init {
 
         terrenos = TerrenoFactory.generarAllTerrenos()
         hallazgos = HallazgoFactory.generarAllHallazgos()
-        mejoras = VentaFactory.generarAllVentas()
-
+        mejoras = VentaFactory.generarVentasBase()
     }
 
     fun addObserver(observer: (Jugador) -> Unit) {
         observers.add(observer)
     }
 
-    fun removeObserver(observer: (Jugador) -> Unit) {
-        observers.remove(observer)
-    }
-
-    fun reset() {
+    fun limpiarObserves() {
         observers.clear()
     }
 
@@ -61,7 +61,15 @@ class Jugador {
 
     private fun excavar(posicionTerreno: Int){
         val terreno = terrenos[posicionTerreno] as TerrenoExcavable
+        arqueologos -= 1
         terrenos[posicionTerreno] = terreno.excavar()
+    }
+
+    fun finalizarExcavacion(posicionTerreno: Int){
+        val terreno = terrenos[posicionTerreno] as TerrenoExcavandose
+        arqueologos += 1
+        terrenos[posicionTerreno] = terreno.finalizarExcavacion()
+        notifyObservers()
     }
 
     fun vender(posicionHallazgo: Int){
@@ -71,8 +79,11 @@ class Jugador {
         notifyObservers()
     }
 
-    fun comprarMejora(mejora: Venta){
-
+    fun comprarMejora(mejora: Venta, cantidadComprada : Int){
+        val cantidadMejora: Int = mejoras[mejora]!!
+        mejoras[mejora] = cantidadMejora + cantidadComprada
+        dinero -= (mejora.coste * cantidadComprada)
+        notifyObservers()
     }
 
     private fun generarHallazgo(){

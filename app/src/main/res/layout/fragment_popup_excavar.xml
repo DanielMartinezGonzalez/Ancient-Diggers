@@ -5,13 +5,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:background="@color/purple_500">
+    android:background="@color/deep_brown">
 
     <TextView
         android:id="@+id/tituloPopupExcavar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Qué desea hacer?"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Excavar"
+            android:backgroundTint="@color/brown"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -38,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancelar"
+            android:backgroundTint="@color/brown"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

@@ -44,9 +44,16 @@
             android:src="@drawable/ic_lock"
             android:visibility="gone"/>
 
+        <ImageView
+            android:id="@+id/relojIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_clock"
+            android:visibility="gone"/>
+
     </androidx.cardview.widget.CardView>
 
-    <!-- Vista semitransparente para simular el bloqueo (inicialmente oculta) -->
 
 
 </FrameLayout>

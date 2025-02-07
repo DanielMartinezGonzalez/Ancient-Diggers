@@ -11,6 +11,7 @@ import com.example.ancientdiggers.R
 import com.example.ancientdiggers.data.Partida
 import com.example.ancientdiggers.data.model.terreno.Terreno
 import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavable
+import com.example.ancientdiggers.data.model.terreno.terrenos.TerrenoExcavandose
 import com.google.android.material.snackbar.Snackbar
 
 class TerrenoAdapter(
@@ -37,7 +38,6 @@ class TerrenoAdapter(
         }
         holder.itemView.setOnLongClickListener {
             if(Partida.jugador.puedeComprarTerreno(position)) {
-                holder.desbloquear()
                 Snackbar.make(holder.itemView, "Has comprado este terreno", Snackbar.LENGTH_SHORT).show()
             } else {
                 Snackbar.make(holder.itemView, "No puedes comprar este terreno", Snackbar.LENGTH_SHORT).show()
@@ -53,20 +53,24 @@ class TerrenoAdapter(
         private val textView: TextView = itemView.findViewById(R.id.terrenoText)
         private val viewBlock: View = itemView.findViewById(R.id.blockOverlay)
         private val lockIcon: ImageView = itemView.findViewById(R.id.lockIcon)
+        private var relojIcon: ImageView = itemView.findViewById(R.id.relojIcon)
 
         fun bind(terreno: Terreno) {
-            imageView.setImageResource(terreno.imagen)
-            textView.text = terreno.nombre
-            if (!terreno.excavable() && terreno is TerrenoExcavable){
-                textView.text = terreno.nombre + " bloqueado"
+            if(terreno is TerrenoExcavandose){
                 viewBlock.visibility = View.VISIBLE
-                lockIcon.visibility = ImageView.VISIBLE
-            }
-        }
+                relojIcon.visibility = ImageView.VISIBLE
+                this.bind(terreno.terreno)
 
-        fun desbloquear(){
-            viewBlock.visibility  = View.GONE
-            lockIcon.visibility = ImageView.GONE
+            } else {
+                imageView.setImageResource(terreno.imagen)
+                textView.text = terreno.nombre
+                if (!terreno.excavable() && terreno is TerrenoExcavable){
+                    textView.text = terreno.nombre + " bloqueado"
+                    viewBlock.visibility = View.VISIBLE
+                    lockIcon.visibility = ImageView.VISIBLE
+                }
+            }
+
         }
     }
 }

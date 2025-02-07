@@ -18,7 +18,7 @@ open class TerrenoExcavable (
 
 
     open fun excavar(): Terreno{
-        return TerrenoMedioExcavar(nombre, desbloqueado, coste)
+        return TerrenoExcavandose(nombre, TerrenoMedioExcavar(nombre, desbloqueado, coste))
     }
 
     fun desbloquear() {

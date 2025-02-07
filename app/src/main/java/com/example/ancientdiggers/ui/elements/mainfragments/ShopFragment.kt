@@ -10,13 +10,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ancientdiggers.R
 import com.example.ancientdiggers.data.Partida
+import com.example.ancientdiggers.data.factory.VentaFactory
+import com.example.ancientdiggers.data.model.venta.Venta
 import com.example.ancientdiggers.domain.adapter.VentaAdapter
+import com.google.android.material.snackbar.Snackbar
 
 
 class ShopFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: VentaAdapter
     private lateinit var btnComprar: Button
+    private lateinit var ventas: HashMap<Venta, Int>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,14 +35,18 @@ class ShopFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerViewShop)
         recyclerView.layoutManager = GridLayoutManager(context, 1)
         btnComprar = view.findViewById(R.id.btnComprar)
+        ventas = VentaFactory.generarVentasBase()
+        adapter = VentaAdapter(ventas)
+        recyclerView.adapter = adapter
 
-        actualizarTienda()
-        Partida.jugador.addObserver {
-            actualizarTienda()
-        }
+        btnComprar.setOnClickListener {
+            val seleccionadas = adapter.getSelectedQuantities()
+            seleccionadas.forEach { (venta, cantidad) ->
+                if (cantidad > 0) {
+                    Partida.jugador.comprarMejora(venta, cantidad)
+                }
+            }
+            Snackbar.make(view, "Compra realizada", Snackbar.LENGTH_SHORT).show()        }
     }
 
-    private fun actualizarTienda(){
-
-    }
 }

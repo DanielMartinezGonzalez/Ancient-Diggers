@@ -2,10 +2,10 @@ package com.example.ancientdiggers.data.model.venta
 
 import java.io.Serializable
 
-enum class TipoMejora { VELOCIDAD_EXCAVACION, VACCEOCOINS }
+enum class TipoMejora { VELOCIDAD_EXCAVACION }
 
-class Venta (
-    val nombre: TipoMejora,
+data class Venta (
+    val nombreMejora: TipoMejora,
     val coste: Int
 ):Serializable{
 
